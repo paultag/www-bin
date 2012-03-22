@@ -15,7 +15,6 @@ cd /srv/www/
 SRV="/srv/www/uwsgi"
 DATA="$SRV/app/$APP"
 SOCK="$SRV/sock/$APP.sock"
-PID="$SRV/pid/$APP.pid"
 
 exec uwsgi \
     --plugins python27 \
