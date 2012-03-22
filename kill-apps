@@ -1,0 +1,18 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte, 2012, Expat.
+
+if [ "x$UID" == "x0" ]; then
+    echo "Please don't serve as root."
+    exit 1
+fi
+
+cd pids
+
+for x in `ls`; do
+    kill `cat $x`;
+    if [ $? -ne 0 ]; then
+        echo "ERROR WITH $x"
+    else
+        rm $x
+    fi
+done

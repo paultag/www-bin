@@ -1,0 +1,17 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte, 2012, Expat.
+
+if [ "x$UID" == "x0" ]; then
+    echo "Please don't serve as root."
+    exit 1
+fi
+
+APP="$1"
+
+cd /srv/www
+
+while read app; do
+    #./start-app-failwrapper $app>./logs/$app.stdout 2>./logs/$app.stderr &
+    ./start-app $app>./logs/$app.stdout 2>./logs/$app.stderr &
+    echo "$!" > ./pids/$app.pid
+done < apps

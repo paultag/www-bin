@@ -1,0 +1,25 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte, 2012, Expat.
+
+if [ "x$UID" == "x0" ]; then
+    echo "Please don't serve as root."
+    exit 1
+fi
+
+APP="$1"
+
+WORKERS=1
+
+cd /srv/www/
+
+SRV="/srv/www/uwsgi"
+DATA="$SRV/app/$APP"
+SOCK="$SRV/sock/$APP.sock"
+PID="$SRV/pid/$APP.pid"
+
+exec uwsgi \
+    --plugins python27 \
+    --chdir   $DATA/.. \
+    --socket  $SOCK \
+    --chmod-socket \
+    -wsgi ./$APP/django_wsgi.py

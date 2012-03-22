@@ -1,0 +1,14 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte, 2012, Expat.
+
+cd pids
+
+for x in `ls`; do
+    PID=$(ps -ef | grep $(cat $x) | grep -v grep | awk '{print $2}')
+    echo -n "Checking $x  - "
+    if [ "x$PID" == "x" ]; then
+        echo "[ [31mFail[0m ]"
+    else
+        echo "[  [33mok[0m  ]"
+    fi
+done

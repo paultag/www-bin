@@ -1,0 +1,29 @@
+#!/bin/bash
+# Copyright (c) Paul Tagliamonte, 2012, Expat.
+
+if [ "x$UID" == "x0" ]; then
+    echo "Please don't serve as root."
+    exit 1
+fi
+
+APP="$1"
+
+echo "STARTING $APP"
+
+cd /srv/www/
+
+./start-app $APP
+RET=$?
+if [ $RET -ne 0 ]; then
+
+mailx -s "Failure on uWSGI app $APP." tag@pault.ag <<EOF
+Howdy there,
+
+I'm your friendly app server. It looks like something's gone down with a
+nonzero exit status. Sorry 'bout that.
+
+Anyway, have a good day. Good luck fixing this.
+ - Past Paul
+EOF
+
+fi
