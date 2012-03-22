@@ -11,7 +11,7 @@ APP="$1"
 cd /srv/www
 
 while read app; do
-    #./start-app-failwrapper $app>./logs/$app.stdout 2>./logs/$app.stderr &
-    ./start-app $app>./logs/$app.stdout 2>./logs/$app.stderr &
+    #start-app-failwrapper $app>./logs/$app.stdout 2>./logs/$app.stderr &
+    start-app $app>./logs/$app.stdout 2>./logs/$app.stderr &
     echo "$!" > ./pids/$app.pid
 done < apps

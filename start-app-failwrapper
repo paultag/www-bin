@@ -12,7 +12,7 @@ echo "STARTING $APP"
 
 cd /srv/www/
 
-./start-app $APP
+start-app $APP
 RET=$?
 if [ $RET -ne 0 ]; then
 
