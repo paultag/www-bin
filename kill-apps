@@ -9,6 +9,7 @@ fi
 cd pids
 
 for x in `ls`; do
+    echo "Killing $x"
     kill `cat $x`;
     if [ $? -ne 0 ]; then
         echo "ERROR WITH $x"

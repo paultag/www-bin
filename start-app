@@ -21,4 +21,4 @@ exec uwsgi \
     --chdir   $DATA/.. \
     --socket  $SOCK \
     --chmod-socket \
-    -wsgi ./$APP/django_wsgi.py
+    -wsgi ./$APP/wsgi.py
